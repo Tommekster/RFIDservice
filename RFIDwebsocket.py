@@ -1,14 +1,20 @@
 #! /usr/bin/env python
-import SimpleMFRC522 as RF
-import RPi.GPIO as GPIO
+MOCK = True
+DEBUG = True
+HOST = ''
+#HOST = '127.0.0.1'
+PORT = 50007
+
+if MOCK:
+    import mocks as RF
+    from mocks import GPIO
+else:
+    import SimpleMFRC522 as RF
+    import RPi.GPIO as GPIO
 import threading
 import time
 from websocket_server import WebsocketServer
 
-HOST = ''
-#HOST = '127.0.0.1'
-PORT = 50007
-DEBUG = True
 
 # Called for every client connecting (after handshake)
 def new_client(client, server):
